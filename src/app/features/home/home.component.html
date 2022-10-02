@@ -1,0 +1,7 @@
+<app-search (onSearch)='searchCharacter($event)'></app-search>
+
+<ng-container *ngIf='favouriteCharacters.length'>
+  <div *ngFor='let fc of favouriteCharacters'>
+    {{fc.name}}
+  </div>
+</ng-container>

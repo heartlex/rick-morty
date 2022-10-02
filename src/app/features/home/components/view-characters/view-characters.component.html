@@ -1,0 +1,25 @@
+<ng-container *ngIf='characters$ | async as characters'>
+  <div class='d-flex flex-wrap justify-content-center' style='gap: 1rem 0'>
+    <app-card *ngFor='let character of characters.results; trackBy: identify'
+              [character]='character'
+              (favouriteCharacter)='toggleFavouriteCharacter($event)'
+              (onCharacterClick)='showDetail($event)'
+              class='col-12 col-md-6 col-lg-3'
+    ></app-card>
+  </div>
+  <hr>
+  <span *ngIf='characters.info?.prev' (click)='navigateCharachters(characters.info?.prev)'> prev</span>
+  <ng-container *ngIf='characters.info?.prev && characters.info?.next'>
+    ||
+  </ng-container>
+  <span *ngIf='characters.info?.next' (click)='navigateCharachters(characters.info?.next)'>next</span>
+</ng-container>
+<ng-container *ngIf='showModal && selectedCharacter'>
+  <div id='myModal' class='modal'>
+    <!-- Modal content -->
+    <div class='modal-content'>
+      <span class='close' (click)='showModal = false'>&times;</span>
+      <p>{{selectedCharacter.image}}</p>
+    </div>
+  </div>
+</ng-container>

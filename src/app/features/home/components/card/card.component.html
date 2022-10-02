@@ -1,0 +1,20 @@
+<div class='px-3'>
+  <div class='d-flex justify-content-between align-items-center border border-1 border-dark'>
+    <div class='d-flex align-items-center' style='gap: 0 .5rem'>
+      <div
+        style='width: 6rem; height: 6rem; background-position: center; background-repeat: no-repeat; background-size: cover;'
+        [ngStyle]='{backgroundImage: "url(" + character?.image + ")"}'
+        (click)='emitDetailCharacter()'
+      >
+      </div>
+      <span>
+      {{character?.name}}
+    </span>
+    </div>
+    <span class='pe-2'>
+      <img style='width: 16px' (click)='toggleFavouriteCharacter()'
+         src='{{liked ? "assets/heart-full.png" : "assets/heart.png"}}'>
+    </span>
+  </div>
+</div>
+
