@@ -20,4 +20,9 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return only numbers', () => {
+    expect(component.getCharacterEpisodes(["test/string/1"])).toEqual([" 1"]);
+  })
+
 });
