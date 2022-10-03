@@ -7,7 +7,7 @@ import { StateService } from '../../../../core/service/state.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
+export class CardComponent{
 
   @Input('character') character?: Character;
   @Output() favouriteCharacter = new EventEmitter<Character>();
@@ -16,9 +16,6 @@ export class CardComponent implements OnInit {
   liked = false;
 
   constructor(private stateService: StateService) { }
-
-  ngOnInit(): void {
-  }
 
   emitDetailCharacter(): void {
     this.onCharacterClick.emit(this.character);

@@ -8,8 +8,6 @@ import { Character } from '../models/types';
 export class StateService {
   private detailCharacter$ = new BehaviorSubject<Character | undefined>(undefined);
 
-  constructor() { }
-
   setDetailCharacter(c: Character | undefined) {
     this.detailCharacter$.next(c);
   }

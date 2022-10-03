@@ -7,12 +7,11 @@ import { StateService } from '../../../../core/service/state.service';
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   detailCharacter$ = this.stateService.getDetailCharacter();
 
   constructor(private stateService: StateService) { }
 
-  ngOnInit(): void {}
 
   setDetailCharacter() {
     this.stateService.setDetailCharacter(undefined);

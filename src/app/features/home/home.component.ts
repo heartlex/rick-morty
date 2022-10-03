@@ -10,7 +10,7 @@ import { StateService } from '../../core/service/state.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
   characters$ = this.apiService.getCharacters();
   favouriteCharacters: Character[] = [];
 
@@ -20,25 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService, private stateService: StateService) {
   }
 
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
-    }
-
   navigateCharachters(url: string | null | undefined): void {
     if (url) {
       this.characters$ = this.apiService.getCharacters(url);
     }
   }
-
-
-  identify(index: number, character: Character): number {
-    return character.id;
-  }
-
-
 
   searchCharacter(characterName: string): void {
     const param: QueryParam = {key: 'name', value: characterName}
