@@ -4,16 +4,15 @@
       <div
         style='width: 6rem; height: 6rem; background-position: center; background-repeat: no-repeat; background-size: cover;'
         [ngStyle]='{backgroundImage: "url(" + character?.image + ")"}'
-        (click)='emitDetailCharacter()'
+        (click)='setDetailCharacter()'
       >
       </div>
       <span>
       {{character?.name}}
     </span>
     </div>
-    <span class='pe-2'>
-      <img style='width: 16px' (click)='toggleFavouriteCharacter()'
-         src='{{liked ? "assets/heart-full.png" : "assets/heart.png"}}'>
+    <span class='pe-2' (click)='toggleFavouriteCharacter()'>
+      <img style='width: 16px' src='{{liked ? "assets/heart-full.png" : "assets/heart.png"}}'>
     </span>
   </div>
 </div>

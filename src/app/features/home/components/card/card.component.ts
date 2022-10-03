@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Character } from 'rickmortyapi/dist/interfaces';
+import { StateService } from '../../../../core/service/state.service';
 
 @Component({
   selector: 'app-card',
@@ -14,18 +15,22 @@ export class CardComponent implements OnInit {
 
   liked = false;
 
-  constructor() { }
+  constructor(private stateService: StateService) { }
 
   ngOnInit(): void {
   }
 
   emitDetailCharacter(): void {
-      this.onCharacterClick.emit(this.character);
+    this.onCharacterClick.emit(this.character);
   }
 
   toggleFavouriteCharacter(): void {
       this.favouriteCharacter.emit(this.character);
       this.liked = !this.liked;
+  }
+
+  setDetailCharacter() {
+    this.stateService.setDetailCharacter(this.character);
   }
 
 }

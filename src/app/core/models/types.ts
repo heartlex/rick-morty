@@ -81,3 +81,8 @@ export interface Info<T> {
   };
   results: T;
 }
+
+export interface QueryParam {
+  key: string,
+  value: string
+}

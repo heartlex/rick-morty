@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
-import { ViewCharactersComponent } from './components/view-characters/view-characters.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import { ViewCharactersComponent } from './components/view-characters/view-chara
     HomeComponent,
     CardComponent,
     SearchComponent,
-    ViewCharactersComponent
+    ModalComponent,
   ],
   imports: [
     CommonModule,

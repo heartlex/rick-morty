@@ -1,25 +1,37 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { debounceTime, distinctUntilChanged, fromEvent, map, of } from 'rxjs';
-import { Character, Info } from '../../core/models/types';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { of } from 'rxjs';
+import { Character, QueryParam } from '../../core/models/types';
+import { ApiService } from '../../core/service/api.service';
+import { StateService } from '../../core/service/state.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  // @ts-ignore
-
+export class HomeComponent implements OnInit, OnDestroy {
+  characters$ = this.apiService.getCharacters();
   favouriteCharacters: Character[] = [];
 
+  showModal = false;
+  detailCharacter: Character | undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private apiService: ApiService, private stateService: StateService) {
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+        throw new Error('Method not implemented.');
+    }
+
+  navigateCharachters(url: string | null | undefined): void {
+    if (url) {
+      this.characters$ = this.apiService.getCharacters(url);
+    }
+  }
 
 
   identify(index: number, character: Character): number {
@@ -29,7 +41,8 @@ export class HomeComponent implements OnInit {
 
 
   searchCharacter(characterName: string): void {
-    this.http.get<Info<Character[]>>("https://rickandmortyapi.com/api/character?name=" + characterName)
+    const param: QueryParam = {key: 'name', value: characterName}
+    this.apiService.getCharacters(undefined, param)
     .subscribe({
       next: resultChar => {
         this.characters$ = of(resultChar)
@@ -40,8 +53,20 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  toggleFavouriteCharacter(c: Character) {
+    if (this.favouriteCharacters.some(fv => fv.id === c.id)) {
+      this.favouriteCharacters = this.favouriteCharacters.filter(favouriteC => favouriteC.id !== c.id);
+    }
+    else{
+      this.favouriteCharacters.push(c);
+    }
+  }
+
   showDetail(c: Character) {
-    this.selectedCharacter = c;
+    this.detailCharacter = c;
     this.showModal = true;
   }
+
+
+
 }

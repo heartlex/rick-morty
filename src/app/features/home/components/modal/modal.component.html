@@ -1,0 +1,20 @@
+<div *ngIf='detailCharacter$ | async as detailCharacter' class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)='setDetailCharacter()'>&times;</span>
+    <br>
+    <br>
+    <br>
+    <div>ID: {{detailCharacter.id}}</div>
+    <div>NAME: {{detailCharacter.name}}</div>
+    <div>GENDER: {{detailCharacter.gender}}</div>
+    <div>ORIGIN: {{detailCharacter.origin.name}}</div>
+    <div>LOCATION: {{detailCharacter.location.name}}</div>
+    <div>SPECIES: {{detailCharacter.species}}</div>
+    <div>STATUS: {{detailCharacter.status}}</div>
+    <div>CREATED: {{detailCharacter.created | date:'shortDate'}}</div>
+    <div>EPISODES: {{getCharacterEpisodes(detailCharacter.episode)}}</div>
+  </div>
+
+</div>
