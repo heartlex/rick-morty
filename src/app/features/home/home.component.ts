@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Character, QueryParam } from '../../core/models/types';
 import { ApiService } from '../../core/service/api.service';
-import { StateService } from '../../core/service/state.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,7 @@ export class HomeComponent {
   showModal = false;
   detailCharacter: Character | undefined;
 
-  constructor(private apiService: ApiService, private stateService: StateService) {
+  constructor(private apiService: ApiService) {
   }
 
   navigateCharachters(url: string | null | undefined): void {

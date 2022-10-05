@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Character, Info, QueryParam } from '../models/types';
+import { Character, Episode, Info, QueryParam } from '../models/types';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -21,5 +21,18 @@ export class ApiService {
       return this.http.get<Info<Character[]>>("https://rickandmortyapi.com/api/character?" + queryParams)
     }
     return this.http.get<Info<Character[]>>("https://rickandmortyapi.com/api/character")
+  }
+
+  getEpisodes(episodes: string[]): Observable<string[]> {
+    return this.http.get<Episode[]>("https://rickandmortyapi.com/api/episode/" + episodes.toString())
+      .pipe(
+        map((episodes: Episode[] | Episode) =>{
+          if (Array.isArray(episodes)) {
+            return episodes.map(episode => episode.episode)
+          } else {
+            return new Array<string>(episodes.episode);
+          }
+        })
+    );
   }
 }
