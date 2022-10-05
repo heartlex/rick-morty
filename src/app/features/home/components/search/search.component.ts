@@ -14,8 +14,6 @@ export class SearchComponent implements OnInit {
 
   selectedCharacter: Character | undefined;
 
-  constructor() { }
-
   ngOnInit(): void {
     if (this.input) {
       fromEvent(this.input?.nativeElement, 'input')

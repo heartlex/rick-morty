@@ -7,16 +7,6 @@ import { getCharacters } from 'rickmortyapi';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'rick-morty';
-  //characters: Character[];
-  x: any;
-  async ngOnInit(): Promise<void> {
-    try {
-      const xx = await getCharacters();
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
 }

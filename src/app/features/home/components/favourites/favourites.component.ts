@@ -6,11 +6,6 @@ import { Character } from 'rickmortyapi/dist/interfaces';
   templateUrl: './favourites.component.html',
   styleUrls: ['./favourites.component.scss']
 })
-export class FavouritesComponent implements OnInit {
+export class FavouritesComponent {
   @Input() favouriteCharacters: Character[] = [];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
