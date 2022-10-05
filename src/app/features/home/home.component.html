@@ -17,11 +17,6 @@
     <span *ngIf='characters.info?.next' (click)='navigateCharachters(characters.info?.next)'>next </span>
   </div>
 </ng-container>
-<div *ngIf='favouriteCharacters.length' class='d-flex flex-column align-items-center mt-5'>
-  <h2>Favourite Characters: </h2>
-  <div *ngFor='let fc of favouriteCharacters'>
-    {{fc.name}}
-  </div>
-</div>
+<app-favourites [favouriteCharacters]='favouriteCharacters'></app-favourites>
 <app-modal>
 </app-modal>

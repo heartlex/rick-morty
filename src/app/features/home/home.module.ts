@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ModalComponent } from './components/modal/modal.component';
     CardComponent,
     SearchComponent,
     ModalComponent,
+    FavouritesComponent,
   ],
   imports: [
     CommonModule,
