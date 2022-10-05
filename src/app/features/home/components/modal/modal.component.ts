@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { StateService } from '../../../../core/service/state.service';
 import { Character } from 'rickmortyapi/dist/interfaces';
-import { map, mergeMap } from 'rxjs';
+import { map, mergeMap, Subscription } from 'rxjs';
 import { ApiService } from '../../../../core/service/api.service';
 
 @Component({
@@ -10,15 +10,17 @@ import { ApiService } from '../../../../core/service/api.service';
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ModalComponent implements OnInit{
+export class ModalComponent implements OnInit, OnDestroy {
   detailCharacter$ = this.stateService.getDetailCharacter();
 
   episodes: string[] = [];
+  subscription: Subscription | undefined;
 
-  constructor(private stateService: StateService, private apiService: ApiService) { }
+  constructor(private stateService: StateService, private apiService: ApiService) {
+  }
 
   ngOnInit(): void {
-    this.detailCharacter$
+    this.subscription = this.detailCharacter$
       .pipe(
         map((dc: Character | undefined) => {
           if (dc) {
@@ -26,18 +28,18 @@ export class ModalComponent implements OnInit{
           } else {
             return []
           }
-        } ),
+        }),
         mergeMap(episodeNumbers => {
           if (episodeNumbers.length) {
             return this.apiService.getEpisodes(episodeNumbers)
           } else {
             return []
           }
-        })
+        }),
+        map(results => this.episodes = results.map(result => " " + result))
       )
-      .subscribe(results => this.episodes = results.map(result => " " + result))
+      .subscribe(episodes => this.episodes = episodes);
   }
-
 
   setDetailCharacter() {
     this.stateService.setDetailCharacter(undefined);
@@ -47,4 +49,7 @@ export class ModalComponent implements OnInit{
     return episodeUrls.map(url => url.replace(/\D/g, ""))
   }
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
 }
