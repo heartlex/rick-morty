@@ -10,8 +10,8 @@
   </div>
   <hr>
   <div class='d-flex justify-content-center' style='gap: 1rem' #controls>
-    <button class='btn btn-primary' *ngIf='characters.info?.prev' (click)='navigateCharachters(characters.info?.prev)'>prev </button>
-    <button class='btn btn-primary' *ngIf='characters.info?.next' (click)='navigateCharachters(characters.info?.next)'>next </button>
+    <button class='btn btn-primary'  [ngClass]='{"btn-light": !characters.info?.prev}' (click)='navigateCharachters(characters.info?.prev)'>prev </button>
+    <button class='btn btn-primary' [ngClass]='{"btn-light": !characters.info?.next}' (click)='navigateCharachters(characters.info?.next)'>next </button>
   </div>
 </ng-container>
 <app-favourites [favouriteCharacters]='favouriteCharacters'></app-favourites>

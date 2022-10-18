@@ -1,14 +1,14 @@
-<div class='px-3' (click)='emitDetailCharacter()'>
+<div class='px-3'>
   <div class='d-flex justify-content-between align-items-center border border-1 border-dark'>
-    <div class='d-flex align-items-center' style='gap: 0 .5rem'>
+    <div class='d-flex align-items-center' style='gap: 0 .5rem' (click)='emitDetailCharacter()'>
       <div
         class='card-image'
         [ngStyle]='{backgroundImage: "url(" + character?.image + ")"}'
       >
       </div>
       <span>
-      {{character?.name}}
-    </span>
+        {{character?.name}}
+      </span>
     </div>
     <span class='pe-2' (click)='toggleFavouriteCharacter()'>
       <img class='like-icon' src='{{liked ? "assets/heart-full.png" : "assets/heart.png"}}' alt='like'>
