@@ -3,20 +3,17 @@
   <div class='d-flex flex-wrap justify-content-center' style='gap: 1rem 0'>
     <app-card *ngFor='let character of characters.results;'
               [character]='character'
+              (onCharacterClick)='showDetail(character)'
               (favouriteCharacter)='toggleFavouriteCharacter($event)'
               class='col-12 col-md-6 col-lg-3'
     ></app-card>
   </div>
   <hr>
-  <div class='d-flex justify-content-center' #controls>
+  <div class='d-flex justify-content-center' style='gap: 1rem' #controls>
     <button class='btn btn-primary' *ngIf='characters.info?.prev' (click)='navigateCharachters(characters.info?.prev)'>prev </button>
-    <span *ngIf='characters.info?.prev && characters.info?.next'
-          class='mx-3'>
-      ||
-  </span>
     <button class='btn btn-primary' *ngIf='characters.info?.next' (click)='navigateCharachters(characters.info?.next)'>next </button>
   </div>
 </ng-container>
 <app-favourites [favouriteCharacters]='favouriteCharacters'></app-favourites>
-<app-modal>
+<app-modal *ngIf='showModal' [episodes]='episodes' [detailCharacter]='detailCharacter' (onClose)='hideDetail()'>
 </app-modal>
