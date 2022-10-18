@@ -15,5 +15,5 @@
   </div>
 </ng-container>
 <app-favourites [favouriteCharacters]='favouriteCharacters'></app-favourites>
-<app-modal *ngIf='showModal' [episodes]='episodes' [detailCharacter]='detailCharacter' (onClose)='hideDetail()'>
+<app-modal *ngIf='detailCharacter' [episodes]='episodes' [detailCharacter]='detailCharacter' (onClose)='hideDetail()'>
 </app-modal>

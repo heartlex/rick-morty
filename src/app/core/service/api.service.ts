@@ -3,7 +3,6 @@ import { Character, Episode, Info, QueryParam } from '../models/types';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,11 +25,11 @@ export class ApiService {
   getEpisodes(episodes: string[]): Observable<string[]> {
     return this.http.get<Episode[]>("https://rickandmortyapi.com/api/episode/" + episodes.toString())
       .pipe(
-        map((episodes: Episode[] | Episode) =>{
-          if (Array.isArray(episodes)) {
-            return episodes.map(episode => episode.episode)
+        map((episodes_: Episode[] | Episode) =>{
+          if (Array.isArray(episodes_)) {
+            return episodes_.map(episode => episode.episode)
           } else {
-            return new Array<string>(episodes.episode);
+            return new Array<string>(episodes_.episode);
           }
         })
     );

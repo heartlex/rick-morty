@@ -15,7 +15,6 @@ export class HomeComponent {
 
   favouriteCharacters: Character[] = [];
 
-  showModal = false;
   detailCharacter: Character | undefined;
   episodes: string[] = [];
 
@@ -50,7 +49,9 @@ export class HomeComponent {
   }
 
   showDetail(c: Character) {
-    this.detailCharacter = c;
+    this.stateService.setDetailCharacter(c);
+    this.stateService.getDetailCharacter()
+      .subscribe(detailCharacter => this.detailCharacter = detailCharacter);
     of(c)
       .pipe(
         map((dc: Character | undefined) => {
@@ -70,14 +71,10 @@ export class HomeComponent {
         map(results => this.episodes = results.map(result => " " + result))
       )
       .subscribe(episodes => this.episodes = episodes);
-
-
-    this.showModal = true;
   }
 
   hideDetail() {
     this.detailCharacter = undefined;
-    this.showModal = false;
   }
 
   getCharacterEpisodes(episodeUrls: string[]) {
