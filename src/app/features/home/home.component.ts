@@ -1,24 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { map, mergeMap, of } from 'rxjs';
-import { Character, QueryParam } from '../../core/models/types';
+import { map, mergeMap, Observable, of, tap } from 'rxjs';
+import { Character, Info, QueryParam } from '../../core/models/types';
 import { ApiService } from '../../core/service/api.service';
 import { StateService } from '../../core/service/state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  characters$ = this.apiService.getCharacters();
+export class HomeComponent implements OnInit{
+  characters$: Observable<Info<Character[]>> | undefined;
 
   favouriteCharacters: Character[] = [];
 
   detailCharacter: Character | undefined;
   episodes: string[] = [];
 
-  constructor(private apiService: ApiService, private stateService: StateService) {
+  constructor(private apiService: ApiService, private stateService: StateService, private activatedRoute: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    const initialCharacters$ = this.activatedRoute.data
+      .pipe(
+        map(data => {
+          // @ts-ignore
+          return {info : data.data.info, results: data.data.results} as Info<Character[]>
+        })
+      )
+    this.characters$ = initialCharacters$;
   }
 
   navigateCharachters(url: string | null | undefined): void {

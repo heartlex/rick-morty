@@ -4,9 +4,9 @@ import { HomeComponent } from './home.component';
 import { CharactersResolver } from '../../core/resolver/characters.resolver';
 
 const routes: Routes = [{ path: '', component: HomeComponent,
-  // resolve: {
-  //   data: CharactersResolver
-  // }
+  resolve: {
+    data: CharactersResolver
+  }
 }];
 
 @NgModule({
